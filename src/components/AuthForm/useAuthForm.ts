@@ -19,13 +19,11 @@ export const useAuthForm = (type: FormType) => {
   const onSubmit = form.handleSubmit((values) => {
     try {
       if (type === 'sign-up') {
-        console.log('SIGN UP', values);
         toast.success('Account created successfuly. Please sign in.');
         router.push('/sign-in');
       } else {
         toast.success('Sign in successfully');
         router.push('/');
-        console.log('SIGN IN', values);
       }
     } catch (error) {
       console.error(error);
