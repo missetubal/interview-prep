@@ -4,7 +4,7 @@ export const Interview = () => {
   return (
     <>
       <h3>Interview Generator</h3>
-      <Agent />
+      <Agent userName='Tester' type='generate' />
     </>
   );
 };
