@@ -1,10 +1,12 @@
+import { getCurrentUser } from '@/lib/actions/auth.action';
 import { Agent } from '@/src/components';
 
-export const Interview = () => {
+export const Interview = async () => {
+  const user = await getCurrentUser();
   return (
     <>
       <h3>Interview Generator</h3>
-      <Agent userName='Tester' type='generate' />
+      <Agent userName={user?.name ?? ''} userId={user?.id} type='generate' />
     </>
   );
 };
