@@ -1,10 +1,22 @@
 import { Button } from '@/components/ui/button';
+import {
+  getCurrentUser,
+  getInterviewsByUserId,
+  getLatestInterviews,
+} from '@/lib/actions/auth.action';
 import { InterviewCard } from '@/src/components/InterviewCard/interview-card';
 import { dummyInterviews } from '@/src/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Home() {
+export default async function Home() {
+  const user = await getCurrentUser();
+  const [userInterviews, latestInterviews] = await Promise.all([
+    getInterviewsByUserId(user?.id!),
+    getLatestInterviews({ userId: user?.id! }),
+  ]);
+
+  console.log(userInterviews);
   return (
     <>
       <section className='card-cta'>
@@ -28,8 +40,8 @@ export default function Home() {
       <section className='flex flex-col gap-6 mt-8'>
         <h2>Your Interviews</h2>
         <div className='interviews-section'>
-          {dummyInterviews.length > 0 ? (
-            dummyInterviews.map((interview) => (
+          {userInterviews && userInterviews.length > 0 ? (
+            userInterviews.map((interview) => (
               <InterviewCard {...interview} key={interview.id} />
             ))
           ) : (
@@ -40,8 +52,8 @@ export default function Home() {
       <section className='flex flex-col gap-6 mt-8'>
         <h2>Take an Interview</h2>
         <div className='interviews-section'>
-          {dummyInterviews.length > 0 ? (
-            dummyInterviews.map((interview) => (
+          {latestInterviews && latestInterviews.length > 0 ? (
+            latestInterviews.map((interview) => (
               <InterviewCard {...interview} key={interview.id} />
             ))
           ) : (
