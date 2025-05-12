@@ -3,9 +3,8 @@ import {
   getCurrentUser,
   getInterviewsByUserId,
   getLatestInterviews,
-} from '@/lib/actions/auth.action';
+} from '@/lib/actions';
 import { InterviewCard } from '@/src/components/InterviewCard/interview-card';
-import { dummyInterviews } from '@/src/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,7 +15,6 @@ export default async function Home() {
     getLatestInterviews({ userId: user?.id! }),
   ]);
 
-  console.log(userInterviews);
   return (
     <>
       <section className='card-cta'>

@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from '@/firebase/client';
-import { signIn, signUp } from '@/lib/actions/auth.action';
+import { signIn, signUp } from '@/lib/actions';
 
 export const useAuthForm = (type: FormType) => {
   const router = useRouter();

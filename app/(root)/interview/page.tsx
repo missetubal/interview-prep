@@ -1,4 +1,4 @@
-import { getCurrentUser } from '@/lib/actions/auth.action';
+import { getCurrentUser } from '@/lib/actions';
 import { Agent } from '@/src/components';
 
 export const Interview = async () => {
