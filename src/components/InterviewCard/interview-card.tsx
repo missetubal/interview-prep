@@ -9,7 +9,7 @@ export const InterviewCard = ({
   role,
   type,
   techstack,
-  interviewId,
+  id,
   createdAt,
 }: InterviewCardProps) => {
   const feedback = null as Feedback | null;
@@ -53,14 +53,10 @@ export const InterviewCard = ({
           </p>
         </div>
         <div className='flex flex-row justify-between'>
-          <DisplayTechIcons techStack={techstack} />
+          {/* <DisplayTechIcons techStack={techstack} /> */}
           <Button className='btn-primary'>
             <Link
-              href={
-                feedback
-                  ? `/interview/${interviewId}/feedback`
-                  : `/interview/${interviewId}`
-              }
+              href={feedback ? `/interview/${id}/feedback` : `/interview/${id}`}
             >
               {feedback ? 'Check Feedback' : 'View Interview'}
             </Link>
