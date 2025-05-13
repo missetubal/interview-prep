@@ -4,7 +4,8 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { DisplayTechIcons } from './display-tech-icons';
-export const InterviewCard = ({
+import { getFeedbackByInterviewId } from '@/lib/actions/general.actions';
+export const InterviewCard = async ({
   userId,
   role,
   type,
@@ -12,7 +13,10 @@ export const InterviewCard = ({
   id,
   createdAt,
 }: InterviewCardProps) => {
-  const feedback = null as Feedback | null;
+  const feedback =
+    userId && id
+      ? await getFeedbackByInterviewId({ interviewId: id, userId })
+      : null;
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format('MMM D, YYYY');
