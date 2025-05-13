@@ -40,6 +40,7 @@ export const InterviewPage = async ({ params }: RouteParams) => {
         type={'interview'}
         interviewId={interview.id}
         questions={interview.questions}
+        userId={user?.id}
       />
     </>
   );

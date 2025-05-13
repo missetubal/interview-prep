@@ -6,4 +6,9 @@ export {
   signUp,
 } from './auth.actions';
 
-export { getInterviewsByUserId, getLatestInterviews } from './general.actions';
+export {
+  getInterviewsByUserId,
+  getLatestInterviews,
+  createFeedback,
+  getInterviewsById,
+} from './general.actions';

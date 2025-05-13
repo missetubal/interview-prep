@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { vapi } from '@/lib/vapi.sdk';
 import { interviewer } from '@/src/constants';
+import { createFeedback } from '@/lib/actions';
 
 enum CallStatus {
   INACTIVE = 'INACTIVE',
@@ -63,14 +64,15 @@ export const Agent = ({
     };
   }, []);
 
-  const handleGeneratedFeedback = async (messages?: SavedMessage[]) => {
+  const handleGeneratedFeedback = async (messages: SavedMessage[]) => {
     console.log('Generate feedback here');
-    const { id, success } = {
-      success: true,
-      id: 'feedback-id',
-    };
+    const { success, feedbackId } = await createFeedback({
+      interviewId: interviewId!,
+      transcript: messages,
+      userId: userId!,
+    });
 
-    if (success && id) {
+    if (success && feedbackId) {
       router.push(`/interview/${interviewId}/feedback`);
     } else {
       console.log('Error saving feedback');
@@ -82,7 +84,7 @@ export const Agent = ({
     if (callStatus === CallStatus.FINISHED) {
       if (type === 'generate') router.push('/');
       else {
-        handleGeneratedFeedback();
+        handleGeneratedFeedback(messages);
       }
     }
   }, [messages, callStatus, type, userId]);
@@ -145,8 +147,8 @@ export const Agent = ({
             <Image
               src='/user-avatar.png'
               alt='user avatar'
-              width={540}
-              height={540}
+              width={250}
+              height={240}
               className='rounded-full object-cover'
             />
             <h3>{userName}</h3>
